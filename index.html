@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>监控SDK示例</title>
+    <script src="../dist/monitor-sdk.umd.js"></script>
+</head>
+
+<body>
+    <h1>前端监控SDK测试（跨域修复）</h1>
+    <button onclick="throw new Error('测试跨域上报错误')">触发错误</button>
+
+    <script>
+        // 关键：reportUrl改为3002端口（用户当前后端端口）
+        new MonitorSDK({
+            reportUrl: 'http://localhost:3002/api/report',
+            appVersion: '1.0.0',
+        });
+    </script>
+</body>
+
+</html>

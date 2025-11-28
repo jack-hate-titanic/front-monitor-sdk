@@ -1,0 +1,10 @@
+{
+    "presets": [
+        [
+            "@babel/preset-react",
+            {
+                "runtime": "automatic" // 自动导入React（无需手动写import React from 'react'）
+            }
+        ]
+    ]
+}
