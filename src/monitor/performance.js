@@ -4,13 +4,21 @@ export class PerformanceMonitor {
         this.reporter = reporter;
         this.performanceData = { type: 'performance' };
     }
+    // 吹出，钢丝球
 
     // 捕获FP（首次绘制）、FCP（首次内容绘制）
     capturePaintMetrics() {
         const paintEntries = performance.getEntriesByType('paint');
         paintEntries.forEach(entry => {
-            if (entry.name === 'first-paint') this.performanceData.fp = entry.startTime;
-            if (entry.name === 'first-contentful-paint') this.performanceData.fcp = entry.startTime;
+            if (entry.name === 'first-paint') {
+                this.performanceData.fp = entry.startTime;
+                // FPL：首次绘制延迟 = 首次绘制时间 - 导航开始时间（反映从请求到首次渲染的延迟）
+                this.performanceData.fpl = this.navEntry ? entry.startTime - this.navEntry.navigationStart : entry.startTime;
+            }
+            // FCP：首次内容绘制（近似白屏时间）
+            if (entry.name === 'first-contentful-paint') {
+                this.performanceData.fcp = entry.startTime;
+            }
         });
     }
 

@@ -4,6 +4,7 @@ import { PerformanceMonitor } from './monitor/performance';
 import { ErrorMonitor } from './monitor/error';
 import { FrameworkMonitor } from './monitor/framework';
 import { RequestMonitor } from './utils/request';
+import { BehaviorMonitor } from './monitor/behavior';
 
 export default class MonitorSDK {
     constructor(options) {
@@ -26,6 +27,7 @@ export default class MonitorSDK {
         new ErrorMonitor(this.reporter).init();
         new FrameworkMonitor(this.reporter, this.options).init();
         new RequestMonitor(this.reporter).init();
+        new BehaviorMonitor(this.reporter).init();
     }
 }
 
